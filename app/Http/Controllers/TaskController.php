@@ -42,7 +42,7 @@ class TaskController extends Controller
         if($task){
             $task->completed = $request['completed'];
             $task->save();
-            return  response('Success',200);
+            return  response()->json($task);
         }else{
             return response('Unauthoraized',403);
         }
@@ -55,7 +55,7 @@ class TaskController extends Controller
 
         if($task){
             Task::destroy($task->id);
-            return  response('Success',200);
+            return  response()->json($task);
         }else{
             return response('Unauthoraized',403);
         }

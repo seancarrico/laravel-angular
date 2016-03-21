@@ -18,7 +18,6 @@ var app = angular.module('taskApp', ['ui.router', 'satellizer'])
             });
 
         function redirectWhenLoggedOut($q, $injector) {
-            console.log('hello');
             return {
                 responseError: function (rejection) {
                     var $state = $injector.get('$state');

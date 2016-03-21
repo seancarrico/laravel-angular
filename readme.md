@@ -1,27 +1,58 @@
-# Laravel PHP Framework
+# Simple Rest API Example Using Laravel & Angular.js
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+This is a sample app using Angular and Laravel PHP that consists of:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+- An API to create, read, and remove tasks.
+- A front-end to create, read and remove tasks. 
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+It builds off the basic Angularjs tutorial concerning creating a todo list. In addition to having a list of todo items/tasks, 
+I also utilize Json Web Tokens (JWT) to authenticate users and limit the lists and API actions to the logged in user.
 
-## Official Documentation
+The goal of this app it to mimic the basic minimum requirements of an API. 
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+* Noted missing features:
+This API is not fully restful. It does not return hypermedia at part of its response objects. Nor does it handle content negotiation. 
+See [Phil Sturgeon: Build APIs you Won't Hate](https://leanpub.com/build-apis-you-wont-hate) for more information on the four levels of REST
 
-## Contributing
+## System Requirments
+* [composer](https://getcomposer.org/)
+* PHP >= 5.5.9
+* OpenSSL PHP Extension
+* PDO PHP Extension
+* Mbstring PHP Extension
+* Tokenizer PHP Extension
+* [Node.js](https://nodejs.org/en/download/)
+* [npm](https://www.npmjs.com/)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+## How to Use
 
-## Security Vulnerabilities
+### Laravel Related Task:
+* After cloning the project run "composer install"
+* Copy the .env.example file to .env. and update the following values
+**   DB_HOST=your host name
+**   DB_PORT=your default port
+**   DB_DATABASE=your database name
+**   DB_USERNAME=your username
+**   DB_PASSWORD=your password
+* Run "php artisan key:generate" - this will create the apps encryption key
+* Run "php artisan migrate" - this will create the users and tasks tables in the db you specified in the .env
+* Run "php artisan db:seed" - this will add test user and tasks. All users have the default password of "password"
+* Run "php artisan serve" - this will create a test locahost at loacahost:8000
+ 
+### Angularjs Related tasks:
+* Run "npm install angular satellizer angular-ui-router bootstrap" in the public directory - this will add required js and css files to the "node_modules" directory
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Testing the App:
+* Enter the following url into your preferred browser "http://localhost:8000/index.html"
+* Select any of the test user emails and enter the "password" into the password input
+* You will see all tasks related to that specific user
+Feel free to add, delete, or mark tasks as complete 
 
-## License
+## Notes
+I used modified UUID (UUID without "-" character) rather than int values for my primary keys. 
+This approach will ensure resource uniqueness across multiple DBs and increase scalability.
+In the case that key length is a concern, the modified UUID can easily be converted to binary(16) and is as
+performant as bigint. See [UUIDs the optimized way](https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/) for more information
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+In a real work usage case, the angular app and API backend would be their own projects with sperate repositories. 
+Being that this is an example app, I felt it acceptable to package them together.
