@@ -1,5 +1,5 @@
 var app = angular.module('taskApp', ['ui.router', 'satellizer'])
-    .config(function($stateProvider, $urlRouterProvider, $authProvider,$provide) {
+    .config(function ($stateProvider, $urlRouterProvider, $authProvider, $provide) {
 
         $authProvider.loginUrl = '/api/authenticate';
 

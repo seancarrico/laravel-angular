@@ -6,27 +6,32 @@
         <h3>{{currentUser.name}}: Task List</h3>
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>Completed</th>
-                    <th>Description</th>
-                    <th>Task Created</th>
-                    <th>Last Update</th>
-                    <th>Delete</th>
-                </tr>
+            <tr>
+                <th>Completed</th>
+                <th>Description</th>
+                <th>Task Created</th>
+                <th>Last Update</th>
+                <th>Delete</th>
+            </tr>
             </thead>
             <tr ng-repeat='task in tasks'>
                 <td>
-                    <input type="checkbox" ng-checked="task.completed"  ng-true-value="1" ng-false-value="0" ng-model="task.completed" ng-change="update($index)">
+                    <input type="checkbox" ng-checked="task.completed" ng-true-value="1" ng-false-value="0"
+                           ng-model="task.completed" ng-change="update($index)">
                 </td>
                 <td>{{task.description}}</td>
                 <td>{{task.created_at}}</td>
                 <td>{{task.updated_at}}</td>
-                <td><button class="btn btn-danger btn-xs" ng-click="delete($index)">  <span class="glyphicon glyphicon-trash" ></span></button></td>
+                <td>
+                    <button class="btn btn-danger btn-xs" ng-click="delete($index)"><span
+                            class="glyphicon glyphicon-trash"></span></button>
+                </td>
             </tr>
         </table>
         <form>
             <div class="form-group">
-                <input  ng-keyup="$event.keyCode == 13 ? save() : null" type="text" class="form-control" placeholder="Add Tasks" ng-model="newTask.description">
+                <input ng-keyup="$event.keyCode == 13 ? save() : null" type="text" class="form-control"
+                       placeholder="Add Tasks" ng-model="newTask.description">
             </div>
         </form>
 

@@ -20,7 +20,7 @@ class TaskController extends Controller
     public function index()
     {
         $user = JWTAuth::parseToken()->authenticate();
-        $tasks = Task::where('user_id', $user->id) ->get();
+        $tasks = Task::where('user_id', $user->id)->get();
 
         return $tasks;
     }
@@ -38,26 +38,26 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         $user = JWTAuth::parseToken()->authenticate();
-        $task = Task::where('user_id', $user->id)->where('id',$id)->first();
-        if($task){
+        $task = Task::where('user_id', $user->id)->where('id', $id)->first();
+        if ($task) {
             $task->completed = $request['completed'];
             $task->save();
-            return  response()->json($task);
-        }else{
-            return response('Unauthoraized',403);
+            return response()->json($task);
+        } else {
+            return response('Unauthoraized', 403);
         }
     }
 
     public function destroy($id)
     {
         $user = JWTAuth::parseToken()->authenticate();
-        $task = Task::where('user_id', $user->id)->where('id',$id)->first();
+        $task = Task::where('user_id', $user->id)->where('id', $id)->first();
 
-        if($task){
+        if ($task) {
             Task::destroy($task->id);
-            return  response()->json($task);
-        }else{
-            return response('Unauthoraized',403);
+            return response()->json($task);
+        } else {
+            return response('Unauthoraized', 403);
         }
     }
 
