@@ -14,3 +14,9 @@ fi
 
 echo ${BUILD_ENV}
 echo ${TRAVIS_BRANCH}
+
+git fetch --tags
+git fetch --unshallow
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+
+echo ${BRANCH}
